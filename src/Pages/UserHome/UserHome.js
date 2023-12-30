@@ -1,13 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 // import { UserContext } from "../../components/main/";
 
 import { useNavigate } from "react-router-dom";
 // import { StateContext } from "../main/context";
 import { CgProfile } from "react-icons/cg";
 import { IoIosArrowForward } from "react-icons/io";
-import { state } from "../main/stateValue";
-import "./Home.css";
-import axios from "./axiosConfig";
+// import { state } from "../main/stateValue";
+import "./UserHome2.css";
+import axios from "../../AxiosConfig/AxiosConfig";
+import { state } from "../../components/stateValue";
+
+// const state = createContext();
 
 function UserHome() {
     const { username, setUserName } = useContext(state);
@@ -43,7 +46,7 @@ function UserHome() {
                 })
                 .then((response) => {
                     console.log(
-                        "all question resopnse",
+                        "all question response",
                         response.data.allQuestion
                     );
                     setQuestions(response?.data?.allQuestion);
@@ -67,17 +70,19 @@ function UserHome() {
             )
         );
     }, [search, questions]);
+
     function click(q) {
-        console.log("id", q.questionid);
-        navigate("/answer/" + q.questionid);
+        console.log("id", q.question_id);
+        navigate("/answer/" + q.question_id);
     }
+
     return (
         <>
             <div className="thewholepart">
                 <div className="upperpart">
                     <div className="tops col-12 col-md-8 md-4">
                         <button className="blue_button" onClick={handleclick}>
-                            AskQuestions
+                            Ask Questions
                         </button>
                     </div>
                     <div className="search_bar">
@@ -92,11 +97,11 @@ function UserHome() {
                     </div>
 
                     <div className="n_user">
-                        <h2 className="header_border">Welcome</h2>
+                        <h2 className="header_border">Welcome: {username}</h2>
                     </div>
                 </div>
                 <div className="marginedpart">
-                    <h1 className="questionshead">Questions</h1>
+                    <h1 className="questionshead"> Asked Questions :</h1>
 
                     {Filter.length > 0 ? (
                         Filter.map((singleQuestion, index) => (
@@ -109,15 +114,16 @@ function UserHome() {
                                     <hr />
                                     <CgProfile className="profile" />
                                     <p className="usernamef">
-                                        {singleQuestion?.username}
+                                        {singleQuestion?.user_name}
                                     </p>
                                 </div>
-                                <div className="width">
+                                <div className="titleWidth">
                                     <h4 className="titlename">
                                         {singleQuestion?.title}
                                     </h4>
                                 </div>
                                 <div>
+                                    {/* <hr /> */}
                                     <IoIosArrowForward
                                         className="arrowright"
                                         size="40px"
@@ -126,7 +132,9 @@ function UserHome() {
                             </div>
                         ))
                     ) : (
-                        <p>No matching questions found.</p>
+                        <p className="noQuestion">
+                            No matching questions found.
+                        </p>
                     )}
                 </div>
             </div>

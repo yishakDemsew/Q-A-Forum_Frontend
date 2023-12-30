@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./AskQuestion.css";
 import axios from "../../AxiosConfig/AxiosConfig";
@@ -11,8 +11,26 @@ function AskQuestion() {
     //state to store server response
     let [questionResponse, setQuestionResponse] = useState("");
 
+    useEffect(() => {
+        // Function to clear the message after 3 seconds (3000 milliseconds)
+        const clearMessage = setTimeout(() => {
+            setQuestionResponse("");
+            // window.location.reload();
+        }, 2000);
+
+        // Clean up the timeout to prevent memory leaks
+        return () => clearTimeout(clearMessage);
+    }, [questionResponse]);
+
     function submit(e) {
         e.preventDefault();
+
+        console.log("Before setting: ", questionResponse); // Debugging line
+
+        setQuestionResponse("");
+
+        console.log("After setting: ", questionResponse); // Debugging line
+
         if (!titleValue || !discriptionValue) {
             return setQuestionResponse(
                 "Question title or Discrtiption can not be empty"
@@ -21,21 +39,27 @@ function AskQuestion() {
         const token = localStorage.getItem("token");
         try {
             console.log("token ", token);
+
+            const payload = {
+                title: titleValue,
+                description: discriptionValue,
+            };
+
+            // console.log("Request Payload:", payload);
+
             axios
-                .post(
-                    "/questions/ask",
-                    {
-                        title: titleValue,
-                        description: discriptionValue,
+                .post("/questions/ask", payload, {
+                    headers: {
+                        authorization: "Bearer " + token,
                     },
-                    {
-                        headers: {
-                            authorization: "Bearer " + token,
-                        },
-                    }
-                )
+                })
                 .then((response) => {
+                    console.log("Request Payload:", payload);
                     setQuestionResponse(response.data.msg);
+                    console.log("question Response", questionResponse);
+                    // Clear the state values for title and description
+                    setTitleValue("");
+                    setDiscriptionValue("");
                     e.target.reset();
                 })
                 .catch((err) => {
@@ -45,10 +69,13 @@ function AskQuestion() {
             console.log(error);
         }
     }
+
     return (
         <div className="thewhole">
             <div className="askQuestion">
-                <h1>Steps to write a good question</h1>
+                <h1 className="stepsToGoodQuestion">
+                    Steps to write a good question
+                </h1>
 
                 <ul className="">
                     <li className="no1">
@@ -69,15 +96,15 @@ function AskQuestion() {
             <div className="askQuestion">
                 <br />
                 <br />
-                <br />
-                <br />
+                {/* <br />we
+                <br /> */}
                 <h1>Ask a public question</h1>
                 <Link to="/home" className="goto">
                     <p className="gotoPage">Go to Question page</p>
                 </Link>
 
                 <br />
-                <h1 className="blue">{questionResponse}</h1>
+                {/* <h1 className="red">{questionResponse}</h1> */}
             </div>
 
             <form onSubmit={submit}>
@@ -100,6 +127,18 @@ function AskQuestion() {
                         placeholder="Question description..."
                     ></textarea>
                     <br />
+                    {/* <h1 className="red">{questionResponse}</h1> */}
+
+                    <h1
+                        className={
+                            questionResponse === "Question submitted"
+                                ? "green"
+                                : "red"
+                        }
+                    >
+                        {questionResponse}
+                    </h1>
+
                     <button className="allQuestion-button" type="submit">
                         Post Your Question
                     </button>

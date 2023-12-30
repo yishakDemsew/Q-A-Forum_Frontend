@@ -3,6 +3,8 @@
     padding: 40px;
     border-radius: 10px;
     /* border: 1px solid blue; */
+
+    box-shadow: 0 4px 12px rgb(158 158 158 / 12%);
 }
 .inputs input {
     width: 450px;
@@ -15,9 +17,21 @@
 .textCenter {
     text-align: center;
 }
+
+.policy {
+    margin: 7px 0;
+    font-size: smaller;
+}
+
 .textCenter a {
     color: #fe8402;
+    text-decoration: none;
 }
+
+.white {
+    color: white !important;
+}
+
 .joinNetwork {
     margin-bottom: 25px;
 }
@@ -36,6 +50,8 @@
     color: white;
     font-size: 14px;
     width: 100%;
+
+    cursor: pointer; /* Add this line to change the cursor on hover */
 }
 .display {
     display: none;
@@ -43,10 +59,29 @@
 .orange {
     color: #fe8402;
 }
+.orange a {
+    text-decoration: none;
+}
+.orange a:hover {
+    text-decoration: underline;
+}
 .forgetPass {
     text-align: right;
     margin: 15px 0;
 }
 .red {
     color: red;
+}
+
+/* for the icon of eye */
+.password-input-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
 }

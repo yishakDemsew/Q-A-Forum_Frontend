@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import img from "../../images/userLogo";
+import img from "../../images/userLogo.png";
 import "./SingleQuestion.css";
-import axios from "./axiosConfig";
+import axios from "../../AxiosConfig/AxiosConfig";
 
 function SingleQuestion() {
     let navigate = useNavigate();
@@ -19,11 +19,29 @@ function SingleQuestion() {
     const [postResponse, setPostResponse] = useState("");
 
     //get the url param to fetch the specific question
+
     const { questionId } = useParams();
-    console.log(questionId);
+    console.log("questionId from singleQuestion", questionId);
+
     const token = localStorage.getItem("token");
 
     useEffect(() => {
+        // Function to clear the message after 3 seconds (3000 milliseconds)
+        const clearMessage = setTimeout(() => {
+            setPostResponse("");
+            // window.location.reload();
+        }, 2000);
+
+        // Clean up the timeout to prevent memory leaks
+        return () => clearTimeout(clearMessage);
+    }, [postResponse]);
+
+    useEffect(() => {
+        if (!token) {
+            // Handle the case where the user is not authenticated.
+            // You might want to redirect the user to the login page or show a message.
+            return;
+        }
         //fetch to get single question title and description
         try {
             axios
@@ -50,16 +68,20 @@ function SingleQuestion() {
                     },
                 })
                 .then((response) => {
+                    console.log("Answers:", response.data.allAnswer);
                     setAnswer(response?.data?.allAnswer);
                 })
                 .catch((error) => {
-                    console.error("Error:", error);
+                    console.error("Error fetching answers:", error);
                     // navigate("/");
                 });
         } catch (error) {
             console.log(error);
         }
-    }, []);
+    }, [questionId, token]);
+
+    // debugger
+    // console.log("Answers:", answer);
 
     function questionAnswer(e) {
         e.preventDefault();
@@ -69,20 +91,18 @@ function SingleQuestion() {
         const token = localStorage.getItem("token");
         try {
             console.log("token ", token);
+            let payload = {
+                answer: userAnswer,
+            };
             axios
-                .post(
-                    "/answer/postanswer/" + questionId,
-                    {
-                        answer: userAnswer,
+                .post("/answer/postanswer/" + questionId, payload, {
+                    headers: {
+                        authorization: "Bearer " + token,
                     },
-                    {
-                        headers: {
-                            authorization: "Bearer " + token,
-                        },
-                    }
-                )
+                })
                 .then((response) => {
                     setPostResponse(response.data.msg);
+                    setUserAnswer("");
                     e.target.reset();
                 })
                 .catch((err) => {
@@ -94,47 +114,52 @@ function SingleQuestion() {
     }
 
     return (
-        <div className="mainQuestionWrapper container">
+        <div className="mainQuestionWrapper ">
             <div className="margined">
-                <div>
-                    <h1>Question</h1>
+                <div className="questionCenter">
+                    <div>
+                        <h1>Question</h1>
+                    </div>
+                    <div>
+                        <h3>{question?.title}</h3>
+                    </div>
+                    <div className="singleQDescritpion">
+                        <p>{question?.description}</p>
+                    </div>
+
+                    <Link to="/home" className="linkgoto">
+                        <p className="gotoPage"> Go to Question page</p>
+                    </Link>
                 </div>
-                <div>
-                    <h3>{question?.title}</h3>
-                </div>
-                <div className="singleQDescritpion">
-                    <p>{question?.description}</p>
-                </div>
-                <hr />
+                {/* <hr /> */}
                 <h1 className="community">Answer From The Community</h1>
-                <hr />
-                {answer?.map((singleAnswer) => {
+                {/* <hr /> */}
+                {answer?.map((singleAnswer, index) => {
                     let theAnswers = (
-                        <div className="singleQAnswers">
+                        <div key={index} className="singleQAnswers">
                             <div className="width">
                                 <img
                                     className="questionImage"
                                     src={img}
                                     alt=""
                                 />
-                                <p>{singleAnswer.username}</p>
+                                <p>{singleAnswer?.user_name}</p>
                             </div>
                             <div className="nameandans">
                                 <h4>{singleAnswer?.answer}</h4>
                             </div>
                         </div>
                     );
+                    console.log(singleAnswer.user_name);
+                    console.log(singleAnswer.answer);
                     return theAnswers;
                 })}
             </div>
 
             <div className="questionAnswer">
                 <h1>Answer The Top Question</h1>
-                <Link to="/home" className="linkgoto">
-                    <p>Go to Question page</p>
-                </Link>
 
-                <h2 className="blue">{postResponse}</h2>
+                {/* <h2 className="blue">{postResponse}</h2> */}
 
                 <form onSubmit={questionAnswer}>
                     <textarea
@@ -146,9 +171,28 @@ function SingleQuestion() {
                         rows=""
                         placeholder="Answer description..."
                     ></textarea>
-                    <button className="questionAnswer-button" type="submit">
-                        Post Your Answer
-                    </button>
+
+                    {/* <h2 className="red">{postResponse}</h2> */}
+
+                    <h3
+                        className={
+                            postResponse === "Answer can not be empty"
+                                ? "red"
+                                : "green"
+                        }
+                    >
+                        {postResponse}
+                    </h3>
+
+                    <div className="answerButton">
+                        <br />
+                        <button
+                            className="questionAnswer-button  allQuestion-button"
+                            type="submit"
+                        >
+                            Post Your Answer
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

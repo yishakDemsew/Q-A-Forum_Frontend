@@ -1,3 +1,8 @@
+.mainQuestionWrapper {
+    display: block;
+    margin-top: 75px;
+    padding-top: 5px;
+}
 .AnswerItem {
     display: flex;
     border-bottom: 1px solid #000;
@@ -61,12 +66,30 @@
     background-color: #0b5ed7;
 }
 
+.red {
+    text-align: center;
+    padding-bottom: 14px;
+}
+
+.green {
+    color: green;
+}
+
 .flex-row {
     display: flex;
     flex-direction: column;
     /* padding-right: 40px; */
 }
 
+.questionCenter {
+    text-align: center;
+    border-bottom: 3px solid #ccc; /* Border at the bottom */
+}
+
+.questionCenter h1 {
+    padding-bottom: 5px;
+    text-decoration-line: underline;
+}
 .Avatar {
     width: 50%;
     height: 50%;
@@ -78,12 +101,43 @@
     margin-right: 20px;
 }
 
-.singleQAnswers {
+/* .singleQAnswers {
     display: flex;
+
+} */
+
+/* Flex container styling */
+.singleQAnswers {
+    display: flex; /* Set as flex container */
+    align-items: center; /* Align items vertically in the center */
+    width: 90%; /* Set width to 90% of the screen width */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add some padding for spacing */
+    border: 1px solid #ccc; /* Optional: Add a border for visual separation */
+}
+
+/* Styling for image */
+.questionImage {
+    width: 50px; /* Set width as desired */
+    border-radius: 50%;
+    /* Optional: Make it circular */
+}
+
+/* Styling for username */
+p {
+    margin: 0;
+    /* font-weight: bold; */
+    /* Make username bold */
+}
+
+/* Styling for answer text */
+h4 {
+    margin: 0; /* Remove default margin */
 }
 
 .nameandans {
-    display: block;
+    /* display: block; */
+    align-self: center; /* Center content vertically */
 }
 
 .margined {
@@ -110,23 +164,30 @@
     width: 100px;
 }
 
+.width {
+    margin-right: 10px;
+}
+
 .width p {
     margin-left: 25px;
 }
 
-.nameandans {
+/* .nameandans {
     margin-top: 40px;
-}
+} */
 
+.questionAnswer {
+    text-align: center;
+}
 .questionAnswer h1 {
-    margin-left: 500px;
-    margin-top: 60px;
-}
-
-.questionAnswer p {
-    margin-left: 570px;
+    /* margin-left: 500px; */
     margin-top: 10px;
 }
+
+/* .questionAnswer p {
+    margin-left: 570px;
+    margin-top: 10px;
+} */
 
 textarea {
     margin-top: 10px;
@@ -141,9 +202,20 @@ textarea {
 
 .linkgoto {
     text-decoration: none;
-    color: black;
+    /* color: black; */
     font-size: larger;
+    text-align: center;
+    margin-bottom: 17px;
 }
+
+.linkgoto .gotoPage {
+    margin-bottom: 10px;
+}
+
+/* linkgoto .gotoPage:hover {
+    background-color: #fe8402;
+    border: none;
+} */
 
 .questionAnswer-button {
     background-color: #516cf0;
@@ -153,6 +225,15 @@ textarea {
     padding: 0px 30px;
     height: 50px;
     width: 300px;
-    margin-left: 100px;
+    /* margin-left: 100px; */
+
     margin-bottom: 10px;
+    font-weight: bolder;
+}
+
+.answerButton {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

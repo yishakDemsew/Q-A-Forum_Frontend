@@ -1,14 +1,14 @@
 import React from "react";
-import img from "../image/img3.png";
+import img from "../../images/evangadiLogo.png";
 import "./Footer.css";
 
 function Footer() {
     return (
         <div className="mainFooterWrapper">
-            <div>
+            <div className="parent-div">
                 <img src={img} alt="evangadi logo" />
             </div>
-            <div>
+            <div className="parent-div">
                 <ul className="footer">
                     <li>
                         <h3>Useful Link</h3>
@@ -21,7 +21,7 @@ function Footer() {
                 </ul>
             </div>
 
-            <div>
+            <div className="parent-div">
                 <ul className="footer">
                     <li>
                         <h3>Contact Info</h3>

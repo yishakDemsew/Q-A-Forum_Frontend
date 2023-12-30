@@ -1,0 +1,21 @@
+/* .mainNotFound {
+    text-align: center; 
+    padding: auto;
+    display: flex;
+
+     padding-bottom: 40vh;
+} */
+
+.container {
+    display: flex;
+    align-items: center; /* This centers items vertically */
+    justify-content: center;
+    /* This centers items horizontally */
+    height: 55vh;
+    /* optional: Set the container height to 100% of the viewport height /; */
+}
+
+/* .mainNotFound {
+    text-align: center;
+    padding: auto;
+} */

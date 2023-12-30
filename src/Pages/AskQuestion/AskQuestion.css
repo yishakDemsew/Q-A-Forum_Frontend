@@ -1,6 +1,9 @@
 .thewhole {
     list-style-position: inside;
     text-align: center;
+    width: 70%;
+    margin: 0 auto; /* This centers the element horizontally */
+    margin-top: 65px;
 }
 
 .no2 {
@@ -25,8 +28,23 @@ ul li {
 }
 
 .gotoPage {
-    margin-top: 10px;
     font-size: 18px;
+    /*  */
+    background-color: #516cf0;
+    border: solid #516cf0;
+    color: #fff;
+    border-radius: 15px;
+    padding: 10px 10px;
+    height: 30px;
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.gotoPage:hover {
+    background-color: #fe8402;
+    border: none;
+    color: black;
 }
 
 .textArea {
@@ -34,7 +52,7 @@ ul li {
 }
 
 .askQuestion input {
-    height: 40px;
+    height: 20px;
     margin-bottom: 7px;
     font-size: larger;
     padding: 10px;
@@ -46,7 +64,7 @@ ul li {
 .askQuestion textarea {
     height: 300px;
     margin-bottom: 7px;
-    font-size: larger;
+    /* font-size: larger; */
     padding: 10px;
     border-radius: 15px;
     border: solid black 1px;
@@ -61,6 +79,24 @@ ul li {
     padding: 0px 30px;
     height: 50px;
     width: 300px;
-    margin-bottom: 20px;
     margin-left: -670px;
+
+    margin: 0 auto; /* This centers the element horizontally */
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.allQuestion-button:hover {
+    background-color: #fe8402;
+    border: none;
+    color: black;
+}
+
+.stepsToGoodQuestion {
+    margin-top: 5px;
+    padding-top: 15px;
+}
+
+.green {
+    color: green;
 }

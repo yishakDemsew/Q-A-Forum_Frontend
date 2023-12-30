@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./RegisterAndLogin.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function RegisterAndLogin() {
     const navigate = useNavigate();
@@ -12,6 +13,8 @@ function RegisterAndLogin() {
     let [lastName, setLastName] = useState("");
     let [userName, setUserName] = useState("");
     let [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+
     function agreeAndJoinHandler(e) {
         e.preventDefault();
         let dataRegister = {
@@ -43,6 +46,7 @@ function RegisterAndLogin() {
     let [loginResponse, setLoginResponse] = useState("");
     let [loginEmail, setLoginEmail] = useState("");
     let [loginPassword, setLoginPassword] = useState("");
+
     function loginHandler(e) {
         e.preventDefault();
         let loginData = {
@@ -84,6 +88,11 @@ function RegisterAndLogin() {
         setRegDis("");
     }
 
+    // The handleTogglePassword function toggles the showPassword state when the icon is clicked.
+    const handleTogglePassword = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <div>
             {/* register */}
@@ -98,7 +107,7 @@ function RegisterAndLogin() {
                                     className="orange"
                                     onClick={registerDisplay}
                                 >
-                                    Sign in
+                                    <a href="#">Sign in</a>
                                 </span>
                             </p>
                         </div>
@@ -138,29 +147,46 @@ function RegisterAndLogin() {
                                 onChange={(e) => setUserName(e.target.value)}
                             />
                             <br />
-                            <input
-                                type="password"
-                                placeholder="Password"
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
+                            <div className="password-input-container">
+                                <input
+                                    // type="password"
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                />
+                                <div
+                                    className="toggle-password"
+                                    onClick={handleTogglePassword}
+                                >
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </div>
+                            </div>
+                            <p className="textCenter policy">
+                                I agree to the <Link>privacy policy</Link> and{" "}
+                                <Link>terms of service.</Link>
+                            </p>
                             <div className="textCenter">
                                 <button
                                     className="button"
                                     onClick={agreeAndJoinHandler}
                                 >
-                                    Agree and Join
+                                    <Link to="/home" className="white">
+                                        Agree and Join
+                                    </Link>
                                 </button>
                             </div>
 
                             <p className="textCenter">
-                                I agree to the <Link>privacy policy</Link> and{" "}
-                                <Link>terms of service.</Link>
-                            </p>
-                            <p className="textCenter">
                                 <br />
-                                <p className="orange" onClick={registerDisplay}>
+                                <span
+                                    className="orange"
+                                    onClick={registerDisplay}
+                                >
                                     Already have an account?
-                                </p>
+                                </span>
                             </p>
                         </div>
                     </div>
@@ -178,7 +204,7 @@ function RegisterAndLogin() {
                             <p className="textCenter">
                                 Don’t have an account?
                                 <span className="orange" onClick={loginDisplay}>
-                                    Create a new account
+                                    <Link to="#"> Create a new account</Link>
                                 </span>
                             </p>
                         </div>
@@ -190,23 +216,35 @@ function RegisterAndLogin() {
                                 onChange={(e) => setLoginEmail(e.target.value)}
                             />
                             <br />
-                            <input
-                                type="password"
-                                placeholder="Password"
-                                onChange={(e) =>
-                                    setLoginPassword(e.target.value)
-                                }
-                            />
+                            <div className="password-input-container">
+                                <input
+                                    // type="password"
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Password"
+                                    // value={password}
+                                    onChange={(e) =>
+                                        setLoginPassword(e.target.value)
+                                    }
+                                />
+                                <div
+                                    className="toggle-password"
+                                    onClick={handleTogglePassword}
+                                >
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </div>
+                            </div>
                             <p className="forgetPass orange">
                                 Forgot password?
                             </p>
                             <div className="textCenter">
-                                <button
-                                    className="button"
-                                    onClick={loginHandler}
-                                >
-                                    Login
-                                </button>
+                                <Link to="/home" className="white">
+                                    <button
+                                        className="button"
+                                        onClick={loginHandler}
+                                    >
+                                        Login
+                                    </button>
+                                </Link>
                             </div>
                             <h3 className="red">{loginResponse}</h3>
                         </div>

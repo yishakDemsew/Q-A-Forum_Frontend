@@ -1,8 +1,8 @@
 import React from "react";
-import About from "./About";
+import About from "../About/About";
 import "./Home.css";
+import RegisterAndLogin from "../RegisterAndLogin/RegisterAndLogin";
 
-import RegisterAndLogin from "./RegisterAndLogin";
 function Home() {
     return (
         <div>

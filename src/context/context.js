@@ -2,21 +2,22 @@ import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import AskQuestion from "../Pages/AskQuestion/AskQuestion";
 import SingleQuestion from "../Pages/SingleQuestion/SingleQuestion";
-import axios from "../home/axiosConfig";
+import axios from "../AxiosConfig/AxiosConfig";
 // import Home from './../home/Home';
 import UserHome from "../Pages/UserHome/UserHome";
 import Home from "../components/Home/Home";
-import NotFound from "./NotFound";
-import SharedPage from "./SharedPage";
-import { createContext } from "react";
+import NotFound from "../components/NotFound/NotFound";
+import SharedPage from "../components/SharedPage/SharedPage";
 
-// import { state } from "./stateValue";
+import { state } from "../components/stateValue";
+import HowItWorks from "../components/HowItWorks/HowItWorks";
 // export const StateContext = createContext();
 
 export const StateProvider = () => {
-    const state = createContext();
-    const [username, setUserName] = useState({ state }); // Set initial state here
-    console.log(username);
+    const [username, setUserName] = useState(null); // Set initial state here
+    // const [shouldSetUsername, setShouldSetUsername] = useState(false);
+    // const [fetchedData, setFetchedData] = useState(""); // Declare fetchedData state
+
     const [isLoading, setIsLoading] = useState(true);
 
     // async function checkUser() {
@@ -72,6 +73,8 @@ export const StateProvider = () => {
     //     }
     // }, []);
 
+    console.log("Username before rendering:", username); // Add this line
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -92,6 +95,7 @@ export const StateProvider = () => {
                         // Handle authentication failure
                     } else {
                         setUserName(data.username);
+                        console.log("Username set:", data.username);
                     }
                 }
             } catch (error) {
@@ -110,6 +114,7 @@ export const StateProvider = () => {
                 <Route path="/" element={<SharedPage />}>
                     <Route path="/" element={<Home />} />
                     <Route path="/home" element={<UserHome />} />
+                    <Route path="/how-it-works" element={<HowItWorks />} />
                     <Route
                         path="/answer/:questionId"
                         element={<SingleQuestion />}
