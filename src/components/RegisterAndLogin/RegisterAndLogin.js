@@ -33,8 +33,8 @@ function RegisterAndLogin() {
             data: JSON.stringify(dataRegister),
         })
             .then((data) => {
-                console.log(data);
-                setRegisterResponse(data.msg);
+                console.log(data.data);
+                setRegisterResponse(data.data.msg);
                 navigate("/home");
             })
             .catch((error) => {
@@ -61,14 +61,12 @@ function RegisterAndLogin() {
             data: JSON.stringify(loginData),
         })
             .then((data) => {
-                console.log(data);
-                setLoginResponse(data.msg);
-                const token = data.token;
+                console.log(data.data);
+                setLoginResponse(data.data.msg);
+                const token = data.data.token;
                 localStorage.setItem("token", token);
-                if (data.msg == "user login successful") {
-                    console.log(data.msg);
-                    navigate("/home");
-                }
+
+                navigate("/home");
             })
             .catch((error) => {
                 console.error("Error:", error);
