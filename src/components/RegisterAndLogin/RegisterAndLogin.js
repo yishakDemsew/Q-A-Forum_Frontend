@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./RegisterAndLogin.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import axios from "../../AxiosConfig/AxiosConfig";
 
 function RegisterAndLogin() {
     const navigate = useNavigate();
@@ -24,14 +25,13 @@ function RegisterAndLogin() {
             username: userName,
             password: password,
         };
-        fetch("http://localhost:5500/api/users/register", {
+        axios("/users/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(dataRegister),
+            data: JSON.stringify(dataRegister),
         })
-            .then((response) => response.json())
             .then((data) => {
                 console.log(data);
                 setRegisterResponse(data.msg);
@@ -53,14 +53,13 @@ function RegisterAndLogin() {
             email: loginEmail,
             password: loginPassword,
         };
-        fetch("http://localhost:5500/api/users/login", {
+        axios("/users/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(loginData),
+            data: JSON.stringify(loginData),
         })
-            .then((response) => response.json())
             .then((data) => {
                 console.log(data);
                 setLoginResponse(data.msg);
