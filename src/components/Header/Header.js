@@ -110,21 +110,22 @@ function Header() {
                                 </Link>
                             )} */}
                             {/*  */}
-                            {(username && location.pathname === "/") ||
-                            location.pathname === "/" ? (
+                            {!username ? (
                                 // If user is authenticated, show Sign Out button or username
                                 <Link to="/" className="button">
                                     SIGN IN
                                 </Link>
                             ) : (
                                 // If user is not authenticated, show Sign In button
-
-                                <button
-                                    onClick={() => handleSignOut()}
-                                    className="button"
-                                >
-                                    Sign Out
-                                </button>
+                                <div style={{ display: "flex", gap: "10px" }}>
+                                    <Link to="/home">Home</Link>
+                                    <button
+                                        onClick={() => handleSignOut()}
+                                        className="button"
+                                    >
+                                        Sign Out
+                                    </button>
+                                </div>
                             )}
                         </li>
                     </ul>
