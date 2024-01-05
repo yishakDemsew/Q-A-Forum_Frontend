@@ -26,45 +26,85 @@ function RegisterAndLogin() {
         return () => clearTimeout(timer);
     }, [registerResponse]); // Re-run the effect when registerResponse changes
 
-    function agreeAndJoinHandler(e) {
+    // function agreeAndJoinHandler(e) {
+    //     e.preventDefault();
+
+    //     // Clear previous response
+    //     setRegisterResponse("");
+    //     // Check if any of the required fields are empty
+    //     if (!email || !firstName || !lastName || !userName || !password) {
+    //         setRegisterResponse("Please fill in all the required fields.");
+    //         return; // Exit the function if any field is empty
+    //     }
+    //     let dataRegister = {
+    //         email: email,
+    //         firstname: firstName,
+    //         lastname: lastName,
+    //         username: userName,
+    //         password: password,
+    //     };
+    //     axios("/users/register", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         data: JSON.stringify(dataRegister),
+    //     })
+    //         .then((data) => {
+    //             console.log(data.data);
+    //             setRegisterResponse(data.data.msg);
+    //             navigate("/home");
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error:", error);
+    //             // Display error message to the user
+    //             setRegisterResponse(
+    //                 "An error occurred while registering. Please try again."
+    //             );
+    //         });
+    // }
+
+    //states to store login data
+
+    const agreeAndJoinHandler = async (e) => {
         e.preventDefault();
 
         // Clear previous response
         setRegisterResponse("");
+
         // Check if any of the required fields are empty
         if (!email || !firstName || !lastName || !userName || !password) {
             setRegisterResponse("Please fill in all the required fields.");
             return; // Exit the function if any field is empty
         }
-        let dataRegister = {
-            email: email,
+
+        const dataRegister = {
+            email,
             firstname: firstName,
             lastname: lastName,
             username: userName,
-            password: password,
+            password,
         };
-        axios("/users/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            data: JSON.stringify(dataRegister),
-        })
-            .then((data) => {
-                console.log(data.data);
-                setRegisterResponse(data.data.msg);
-                navigate("/home");
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                // Display error message to the user
-                setRegisterResponse(
-                    "An error occurred while registering. Please try again."
-                );
-            });
-    }
 
-    //states to store login data
+        try {
+            const response = await axios.post("/users/register", dataRegister, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            console.log(response.data);
+            setRegisterResponse(response.data.msg);
+            navigate("/home");
+        } catch (error) {
+            console.error("Error:", error);
+            // Display error message to the user
+            setRegisterResponse(
+                "An error occurred while registering. Please try again."
+            );
+        }
+    };
+
     let [loginResponse, setLoginResponse] = useState("");
     let [loginEmail, setLoginEmail] = useState("");
     let [loginPassword, setLoginPassword] = useState("");
