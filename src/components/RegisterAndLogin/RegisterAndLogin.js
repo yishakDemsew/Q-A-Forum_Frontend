@@ -29,7 +29,8 @@ function RegisterAndLogin() {
     function agreeAndJoinHandler(e) {
         e.preventDefault();
 
-        // setRegisterResponse("");
+        // Clear previous response
+        setRegisterResponse("");
         // Check if any of the required fields are empty
         if (!email || !firstName || !lastName || !userName || !password) {
             setRegisterResponse("Please fill in all the required fields.");
@@ -72,7 +73,7 @@ function RegisterAndLogin() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setLoginResponse("");
-        }, 3000); // 3000 milliseconds = 3 seconds
+        }, 2000); // 3000 milliseconds = 3 seconds
 
         return () => {
             clearTimeout(timer); // Clear the timer if the component unmounts
