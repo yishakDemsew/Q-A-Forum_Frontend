@@ -14,66 +14,49 @@ import HowItWorks from "../components/HowItWorks/HowItWorks";
 // export const StateContext = createContext();
 
 export const StateProvider = () => {
-    const [username, setUserName] = useState(null); // Set initial state here
-    // const [shouldSetUsername, setShouldSetUsername] = useState(false);
-    // const [fetchedData, setFetchedData] = useState(""); // Declare fetchedData state
+    // const [username, setUserName] = useState(null); // Set initial state here
+    // // const [shouldSetUsername, setShouldSetUsername] = useState(false);
+    // // const [fetchedData, setFetchedData] = useState(""); // Declare fetchedData state
 
-    const [isLoading, setIsLoading] = useState(true);
+    // const [isLoading, setIsLoading] = useState(true);
 
-    // async function checkUser() {
-    //     try {
-    //         const { data } = await axios.get("/users/check", {
-    //             headers: {
-    //                 Authorization: "Bearer " + token,
-    //             },
-    //         });
-
-    //         console.log(data);
-    //         setUserName(data);
-    //         // console.log(username)
-    //     } catch (error) {
-    //         console.log(error.response);
-    //         // navigate("/login");
-    //     }
-    // }
+    // console.log("Username before rendering:", username); // Add this line
 
     // useEffect(() => {
-    //     checkUser();
-    //     // questions();
-    // }, []);
+    //     const fetchData = async () => {
+    //         try {
+    //             const token = localStorage.getItem("token");
 
-    // useEffect(() => {
-    //     const token = localStorage.getItem("token");
+    //             if (token) {
+    //                 const { data } = await axios.get("/users/check", {
+    //                     headers: {
+    //                         Authorization: "Bearer " + token,
+    //                     },
+    //                 });
 
-    //     if (token) {
-    //         fetch("/users/check", {
-    //             headers: {
-    //                 authorization: "Bearer " + token,
-    //             },
-    //         })
-    //             .then((response) => response.json())
-
-    //             .then((data) => {
     //                 if (
     //                     data.msg === "token not provide" ||
     //                     data.msg === "Authentication Invalid"
     //                 ) {
     //                     return;
+    //                     // Handle authentication failure
     //                 } else {
     //                     setUserName(data.username);
-    //                     // console.log(username);
+    //                     console.log("Username set:", data.username);
     //                 }
-    //             })
-    //             .catch((error) => {})
-    //             .finally(() => {
-    //                 setIsLoading(false);
-    //             });
-    //     } else {
-    //         setIsLoading(false);
-    //     }
+    //             }
+    //         } catch (error) {
+    //             // Handle other errors if needed
+    //         } finally {
+    //             setIsLoading(false);
+    //         }
+    //     };
+
+    //     fetchData();
     // }, []);
 
-    console.log("Username before rendering:", username); // Add this line
+    const [username, setUserName] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -91,15 +74,20 @@ export const StateProvider = () => {
                         data.msg === "token not provide" ||
                         data.msg === "Authentication Invalid"
                     ) {
-                        return;
-                        // Handle authentication failure
+                        // Handle authentication failure, e.g., redirect to login
+                        localStorage.removeItem("token"); // Clear token from local storage
+                        setUserName(null); // Clear username from state
                     } else {
                         setUserName(data.username);
                         console.log("Username set:", data.username);
                     }
+                } else {
+                    // Handle the case where there's no token (e.g., user not logged in)
+                    setUserName(null);
                 }
             } catch (error) {
                 // Handle other errors if needed
+                console.error("Error fetching username:", error);
             } finally {
                 setIsLoading(false);
             }
