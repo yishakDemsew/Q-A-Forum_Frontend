@@ -14,6 +14,8 @@ function RegisterAndLogin() {
     let [lastName, setLastName] = useState("");
     let [userName, setUserName] = useState("");
     let [password, setPassword] = useState("");
+    const [isLoadingLogin, setIsLoadingLogin] = useState(false);
+    const [isLoadingSignup, setIsLoadingSignup] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
@@ -87,6 +89,7 @@ function RegisterAndLogin() {
         };
 
         try {
+            setIsLoadingSignup(true);
             const response = await axios.post("/users/register", dataRegister, {
                 headers: {
                     "Content-Type": "application/json",
@@ -95,6 +98,9 @@ function RegisterAndLogin() {
 
             console.log(response.data);
             setRegisterResponse(response.data.msg);
+            const token = response.data.token;
+            localStorage.setItem("token", token);
+            setIsLoadingSignup(false);
             navigate("/home");
         } catch (error) {
             console.error("Error:", error);
@@ -102,6 +108,7 @@ function RegisterAndLogin() {
             setRegisterResponse(
                 "An error occurred while registering. Please try again."
             );
+            setIsLoadingSignup(false);
         }
     };
 
@@ -134,6 +141,7 @@ function RegisterAndLogin() {
             email: loginEmail,
             password: loginPassword,
         };
+        setIsLoadingLogin(true);
         axios("/users/login", {
             method: "POST",
             headers: {
@@ -146,11 +154,12 @@ function RegisterAndLogin() {
                 setLoginResponse(data.data.msg);
                 const token = data.data.token;
                 localStorage.setItem("token", token);
-
+                setIsLoadingLogin(false);
                 navigate("/home");
             })
             .catch((error) => {
                 console.error("Error:", error);
+                setIsLoadingLogin(false);
             });
     }
 
@@ -185,7 +194,11 @@ function RegisterAndLogin() {
                                     className="orange"
                                     onClick={registerDisplay}
                                 >
-                                    <a href="#">Sign in</a>
+                                    <a href="#">
+                                        {isLoadingLogin
+                                            ? "Signing ..."
+                                            : "Sign in"}
+                                    </a>
                                 </span>
                             </p>
                         </div>
@@ -252,7 +265,9 @@ function RegisterAndLogin() {
                                     onClick={agreeAndJoinHandler}
                                 >
                                     <Link to="/home" className="white">
-                                        Agree and Join
+                                        {isLoadingSignup
+                                            ? "Registering ..."
+                                            : "Agree and Join"}
                                     </Link>
                                 </button>
                             </div>
