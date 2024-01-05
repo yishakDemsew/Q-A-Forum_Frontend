@@ -29,7 +29,7 @@ function RegisterAndLogin() {
     function agreeAndJoinHandler(e) {
         e.preventDefault();
 
-        setRegisterResponse("");
+        // setRegisterResponse("");
         // Check if any of the required fields are empty
         if (!email || !firstName || !lastName || !userName || !password) {
             setRegisterResponse("Please fill in all the required fields.");
