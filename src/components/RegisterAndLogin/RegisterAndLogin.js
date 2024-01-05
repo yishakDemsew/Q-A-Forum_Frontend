@@ -68,8 +68,21 @@ function RegisterAndLogin() {
     let [loginEmail, setLoginEmail] = useState("");
     let [loginPassword, setLoginPassword] = useState("");
 
+    // useEffect to clear loginResponse after 3 seconds
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoginResponse("");
+        }, 3000); // 3000 milliseconds = 3 seconds
+
+        return () => {
+            clearTimeout(timer); // Clear the timer if the component unmounts
+        };
+    }, [loginResponse]);
     function loginHandler(e) {
         e.preventDefault();
+        // Clear previous response
+        setLoginResponse("");
+
         let loginData = {
             email: loginEmail,
             password: loginPassword,
