@@ -95,7 +95,7 @@ function UserHome() {
                             placeholder="Search Questions "
                         />
                     </div>
-
+                    console.log(" right before the Welcome",username);
                     <div className="n_user">
                         <h2 className="header_border">Welcome: {username}</h2>
                     </div>
