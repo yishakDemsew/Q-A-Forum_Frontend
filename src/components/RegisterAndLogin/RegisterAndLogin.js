@@ -79,11 +79,11 @@ function RegisterAndLogin() {
         }
 
         const dataRegister = {
-            email,
+            email: email,
             firstname: firstName,
             lastname: lastName,
             username: userName,
-            password,
+            password: password,
         };
 
         try {
