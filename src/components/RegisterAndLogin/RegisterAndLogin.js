@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./RegisterAndLogin.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "../../AxiosConfig/AxiosConfig";
+import { state } from "../stateValue";
 
 function RegisterAndLogin() {
     const navigate = useNavigate();
-
+    const { fetchData } = useContext(state);
     //states to store register data
     let [registerResponse, setRegisterResponse] = useState("");
     let [email, setEmail] = useState("");
@@ -101,6 +102,9 @@ function RegisterAndLogin() {
             const token = response.data.token;
             localStorage.setItem("token", token);
             setIsLoadingSignup(false);
+            setTimeout(() => {
+                fetchData();
+            }, 1000);
             navigate("/home");
         } catch (error) {
             console.error("Error:", error);
@@ -155,6 +159,9 @@ function RegisterAndLogin() {
                 const token = data.data.token;
                 localStorage.setItem("token", token);
                 setIsLoadingLogin(false);
+                setTimeout(() => {
+                    fetchData();
+                }, 1000);
                 navigate("/home");
             })
             .catch((error) => {
@@ -194,11 +201,7 @@ function RegisterAndLogin() {
                                     className="orange"
                                     onClick={registerDisplay}
                                 >
-                                    <a href="#">
-                                        {isLoadingLogin
-                                            ? "Signing ..."
-                                            : "Sign in"}
-                                    </a>
+                                    <a href="#">Sign in</a>
                                 </span>
                             </p>
                         </div>
@@ -335,7 +338,9 @@ function RegisterAndLogin() {
                                         className="button"
                                         onClick={loginHandler}
                                     >
-                                        Login
+                                        {isLoadingLogin
+                                            ? "Signing ..."
+                                            : "Sign in"}
                                     </button>
                                 </Link>
                             </div>

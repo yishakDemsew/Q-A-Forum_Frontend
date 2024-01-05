@@ -57,42 +57,40 @@ export const StateProvider = () => {
 
     const [username, setUserName] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const fetchData = async () => {
+        try {
+            const token = localStorage.getItem("token");
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const token = localStorage.getItem("token");
+            if (token) {
+                const { data } = await axios.get("/users/check", {
+                    headers: {
+                        Authorization: "Bearer " + token,
+                    },
+                });
 
-                if (token) {
-                    const { data } = await axios.get("/users/check", {
-                        headers: {
-                            Authorization: "Bearer " + token,
-                        },
-                    });
-
-                    if (
-                        data.msg === "token not provide" ||
-                        data.msg === "Authentication Invalid"
-                    ) {
-                        // Handle authentication failure, e.g., redirect to login
-                        localStorage.removeItem("token"); // Clear token from local storage
-                        setUserName(null); // Clear username from state
-                    } else {
-                        setUserName(data.username);
-                        console.log("Username set:", data.username);
-                    }
+                if (
+                    data.msg === "token not provide" ||
+                    data.msg === "Authentication Invalid"
+                ) {
+                    // Handle authentication failure, e.g., redirect to login
+                    localStorage.removeItem("token"); // Clear token from local storage
+                    setUserName(null); // Clear username from state
                 } else {
-                    // Handle the case where there's no token (e.g., user not logged in)
-                    setUserName(null);
+                    setUserName(data.username);
+                    console.log("Username set:", data.username);
                 }
-            } catch (error) {
-                // Handle other errors if needed
-                console.error("Error fetching username:", error);
-            } finally {
-                setIsLoading(false);
+            } else {
+                // Handle the case where there's no token (e.g., user not logged in)
+                setUserName(null);
             }
-        };
-
+        } catch (error) {
+            // Handle other errors if needed
+            console.error("Error fetching username:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    useEffect(() => {
         fetchData();
     }, []);
 
@@ -121,7 +119,7 @@ export const StateProvider = () => {
     // );
 
     return (
-        <state.Provider value={{ username, setUserName }}>
+        <state.Provider value={{ fetchData, username, setUserName }}>
             <Routes>
                 <Route path="/" element={<SharedPage />}>
                     <Route index element={<Home />} />
