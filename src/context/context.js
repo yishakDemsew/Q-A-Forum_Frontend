@@ -108,25 +108,43 @@ export const StateProvider = () => {
         fetchData();
     }, []);
 
+    // return (
+    //     <state.Provider value={{ username, setUserName }}>
+    //         <Routes>
+    //             <Route path="/" element={<SharedPage />}>
+    //                 <Route path="/" element={<Home />} />
+    //                 <Route path="/home" element={<UserHome />} />
+    //                 <Route path="/how-it-works" element={<HowItWorks />} />
+    //                 <Route
+    //                     path="/answer/:questionId"
+    //                     element={<SingleQuestion />}
+    //                 />
+    //                 <Route path="/ask" element={<AskQuestion />} />
+    //                 <Route path="*" element={<NotFound />} />
+
+    //                 {/* <Route
+    // 						path="/singlequestion/:questionId"
+    // 						element={<SingleQuestion />}
+    // 					/> */}
+    //                 {/* <Route path="/askQuestion" element={<AskQuestion />} /> */}
+    //             </Route>
+    //         </Routes>
+    //     </state.Provider>
+    // );
+
     return (
         <state.Provider value={{ username, setUserName }}>
             <Routes>
                 <Route path="/" element={<SharedPage />}>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/home" element={<UserHome />} />
-                    <Route path="/how-it-works" element={<HowItWorks />} />
+                    <Route index element={<Home />} />
+                    <Route path="home" element={<UserHome />} />
+                    <Route path="how-it-works" element={<HowItWorks />} />
                     <Route
-                        path="/answer/:questionId"
+                        path="answer/:questionId"
                         element={<SingleQuestion />}
                     />
-                    <Route path="/ask" element={<AskQuestion />} />
+                    <Route path="ask" element={<AskQuestion />} />
                     <Route path="*" element={<NotFound />} />
-
-                    {/* <Route
-							path="/singlequestion/:questionId"
-							element={<SingleQuestion />}
-						/> */}
-                    {/* <Route path="/askQuestion" element={<AskQuestion />} /> */}
                 </Route>
             </Routes>
         </state.Provider>
