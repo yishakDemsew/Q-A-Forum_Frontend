@@ -78,11 +78,17 @@ function RegisterAndLogin() {
             clearTimeout(timer); // Clear the timer if the component unmounts
         };
     }, [loginResponse]);
+
     function loginHandler(e) {
         e.preventDefault();
         // Clear previous response
         setLoginResponse("");
 
+        // Check if email or password is empty
+        if (!loginEmail || !loginPassword) {
+            setLoginResponse("Please provide both email and password.");
+            return; // Exit the function if either email or password is empty
+        }
         let loginData = {
             email: loginEmail,
             password: loginPassword,
