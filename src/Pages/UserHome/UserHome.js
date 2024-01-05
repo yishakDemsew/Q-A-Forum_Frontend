@@ -36,28 +36,44 @@ function UserHome() {
         // "USER"
     );
 
+    // const laosQuestions = async () => {
+    //     try {
+    //         const data = await axios
+    //             .get("/questions/all-questions", {
+    //                 headers: {
+    //                     Authorization: "Bearer " + token,
+    //                 },
+    //             })
+    //             .then((response) => {
+    //                 console.log(
+    //                     "all question response",
+    //                     response.data.allQuestion
+    //                 );
+    //                 setQuestions(response?.data?.allQuestion);
+    //             })
+
+    //             // console.log(data);
+    //             .catch((error) => {
+    //                 console.log(error);
+    //             });
+    //     } catch (error) {
+    //         console.log(error.response);
+    //     }
+    // };
+
     const laosQuestions = async () => {
         try {
-            const data = await axios
-                .get("/questions/all-questions", {
-                    headers: {
-                        Authorization: "Bearer " + token,
-                    },
-                })
-                .then((response) => {
-                    console.log(
-                        "all question response",
-                        response.data.allQuestion
-                    );
-                    setQuestions(response?.data?.allQuestion);
-                })
+            const response = await axios.get("/questions/all-questions", {
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            });
 
-                // console.log(data);
-                .catch((error) => {
-                    console.log(error);
-                });
+            console.log("all question response", response.data.allQuestion);
+            setQuestions(response?.data?.allQuestion);
         } catch (error) {
-            console.log(error.response);
+            console.log(error);
+            // Optionally, handle the error further or set an error state
         }
     };
 
