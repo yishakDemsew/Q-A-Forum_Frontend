@@ -16,8 +16,25 @@ function RegisterAndLogin() {
     let [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
+    useEffect(() => {
+        // Clear the registration response message after 3 seconds
+        const timer = setTimeout(() => {
+            setRegisterResponse("");
+        }, 2000);
+
+        // Cleanup the timer to prevent memory leaks
+        return () => clearTimeout(timer);
+    }, [registerResponse]); // Re-run the effect when registerResponse changes
+
     function agreeAndJoinHandler(e) {
         e.preventDefault();
+
+        setRegisterResponse("");
+        // Check if any of the required fields are empty
+        if (!email || !firstName || !lastName || !userName || !password) {
+            setRegisterResponse("Please fill in all the required fields.");
+            return; // Exit the function if any field is empty
+        }
         let dataRegister = {
             email: email,
             firstname: firstName,
@@ -39,6 +56,10 @@ function RegisterAndLogin() {
             })
             .catch((error) => {
                 console.error("Error:", error);
+                // Display error message to the user
+                setRegisterResponse(
+                    "An error occurred while registering. Please try again."
+                );
             });
     }
 
