@@ -55,3 +55,14 @@ img {
     max-width: 100%; /* Optional: Ensure the image doesn't exceed the container width */
     max-height: 100%; /* Optional: Ensure the image doesn't exceed the container height */
 }
+
+footer .social-icons {
+    display: flex;
+    justify-content: center; /* This centers the icons horizontally */
+    list-style-type: none; /* Removes default list styling */
+    padding: 0; /* Removes default padding */
+}
+
+footer .social-icons li {
+    margin: 0 10px; /* Add some spacing between the icons */
+}
