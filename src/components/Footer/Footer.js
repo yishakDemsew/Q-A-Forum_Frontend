@@ -5,10 +5,12 @@ import "./Footer.css";
 function Footer() {
     return (
         <div className="mainFooterWrapper">
-            <div className="parent-div">
-                <img src={img} alt="evangadi logo" />
+            <div className="parent-div1">
+                <div className="logo-container">
+                    <img src={img} alt="evangadi logo" />
+                </div>
                 {/* social media icons */}
-                <div>
+                <div className="social-icons-container">
                     <ul className="social-icons">
                         <li>
                             <a href="#">
@@ -31,6 +33,7 @@ function Footer() {
                     </ul>
                 </div>
             </div>
+
             <div className="parent-div">
                 <ul className="footer">
                     <li>
