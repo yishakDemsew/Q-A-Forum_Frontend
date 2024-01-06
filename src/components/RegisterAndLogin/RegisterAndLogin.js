@@ -20,7 +20,7 @@ function RegisterAndLogin() {
     const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
-        // Clear the registration response message after 3 seconds
+        // Clear the registration response message after 2 seconds
         const timer = setTimeout(() => {
             setRegisterResponse("");
         }, 2000);
@@ -120,11 +120,11 @@ function RegisterAndLogin() {
     let [loginEmail, setLoginEmail] = useState("");
     let [loginPassword, setLoginPassword] = useState("");
 
-    // useEffect to clear loginResponse after 3 seconds
+    // useEffect to clear loginResponse after 2 seconds
     useEffect(() => {
         const timer = setTimeout(() => {
             setLoginResponse("");
-        }, 2000); // 3000 milliseconds = 3 seconds
+        }, 2000); // 2000 milliseconds = 2 seconds
 
         return () => {
             clearTimeout(timer); // Clear the timer if the component unmounts
@@ -164,9 +164,21 @@ function RegisterAndLogin() {
                 }, 1000);
                 navigate("/home");
             })
+            // .catch((error) => {
+            //     console.error("Error:", error);
+            //     setIsLoadingLogin(false);
+            // });
             .catch((error) => {
                 console.error("Error:", error);
                 setIsLoadingLogin(false);
+                if (error.response) {
+                    const errorMessage = error.response.data.msg;
+                    setLoginResponse(errorMessage);
+                } else {
+                    setLoginResponse(
+                        "An error occurred while logging in. Please try again later."
+                    );
+                }
             });
     }
 
