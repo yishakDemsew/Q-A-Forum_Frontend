@@ -2,6 +2,13 @@ import React from "react";
 import img from "../../images/evangadiLogo.png";
 import "./Footer.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faFacebookF,
+    faYoutube,
+    faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
+
 function Footer() {
     return (
         <div className="mainFooterWrapper">
@@ -16,25 +23,34 @@ function Footer() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <i className="fab fa-facebook"></i>
+                                <FontAwesomeIcon
+                                    icon={faFacebookF}
+                                    className="social-icon"
+                                />
                             </a>
                         </li>
                         <li>
                             <a
-                                href="https://twitter.com/evangaditech"
+                                href="https://www.youtube.com/channel/YOUR_CHANNEL_ID"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <i className="fab fa-twitter"></i>
+                                <FontAwesomeIcon
+                                    icon={faYoutube}
+                                    className="social-icon"
+                                />
                             </a>
                         </li>
                         <li>
                             <a
-                                href="https://www.instagram.com/evangaditech"
+                                href="https://www.instagram.com/evangaditech/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <i className="fab fa-instagram"></i>
+                                <FontAwesomeIcon
+                                    icon={faInstagram}
+                                    className="social-icon"
+                                />
                             </a>
                         </li>
                         {/* Add more icons as needed */}
