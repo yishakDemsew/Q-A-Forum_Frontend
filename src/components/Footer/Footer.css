@@ -66,14 +66,3 @@ footer .social-icons {
 footer .social-icons li {
     margin: 0 10px; /* Add some spacing between the icons */
 }
-
-.parent-div1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* centers items horizontally */
-}
-
-.logo-container,
-.social-icons-container {
-    margin: 10px 0; /* Adds some space between the logo and the icons */
-}

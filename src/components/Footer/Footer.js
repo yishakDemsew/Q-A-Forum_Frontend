@@ -5,28 +5,36 @@ import "./Footer.css";
 function Footer() {
     return (
         <div className="mainFooterWrapper">
-            <div className="parent-div1">
-                <div className="logo-container">
-                    <img src={img} alt="evangadi logo" />
-                </div>
-                {/* social media icons */}
-                <div className="social-icons-container">
+            <div className="parent-div">
+                <img src={img} alt="evangadi logo" />
+                {/* Social media icons */}
+                <div>
                     <ul className="social-icons">
                         <li>
-                            <a href="#">
-                                <span className="material-icons">facebook</span>
+                            <a
+                                href="https://www.facebook.com/evangaditech"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <i className="fab fa-facebook"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <span className="material-icons">twitter</span>
+                            <a
+                                href="https://twitter.com/evangaditech"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <i className="fab fa-twitter"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <span className="material-icons">
-                                    instagram
-                                </span>
+                            <a
+                                href="https://www.instagram.com/evangaditech"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <i className="fab fa-instagram"></i>
                             </a>
                         </li>
                         {/* Add more icons as needed */}
