@@ -31,18 +31,6 @@ function Footer() {
                         </li>
                         <li>
                             <a
-                                href="https://www.youtube.com/channel/YOUR_CHANNEL_ID"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <FontAwesomeIcon
-                                    icon={faYoutube}
-                                    className="social-icon"
-                                />
-                            </a>
-                        </li>
-                        <li>
-                            <a
                                 href="https://www.instagram.com/evangaditech/"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -53,6 +41,19 @@ function Footer() {
                                 />
                             </a>
                         </li>
+                        <li>
+                            <a
+                                href="https://www.youtube.com/channel/YOUR_CHANNEL_ID"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <FontAwesomeIcon
+                                    icon={faYoutube}
+                                    className="social-icon"
+                                />
+                            </a>
+                        </li>
+
                         {/* Add more icons as needed */}
                     </ul>
                 </div>

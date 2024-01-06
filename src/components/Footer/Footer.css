@@ -99,4 +99,30 @@ footer .social-icons li {
     border: 1px solid #fff;
     font-size: 16px;
     height: 38px;
+
+    text-decoration: none;
+    transition: all 0.4s ease;
+}
+
+.social-icons a:hover {
+    background-color: #ffffff80; /* White background with some opacity for hover effect */
+}
+
+.social-icon {
+    color: #333; /* Default icon color */
+    font-size: 24px; /* Adjust size as needed */
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Define brand colors */
+.social-icons a.facebook:hover .social-icon {
+    color: #1877f2; /* Facebook blue */
+}
+
+.social-icons a.youtube:hover .social-icon {
+    color: #ff0000; /* YouTube red */
+}
+
+.social-icons a.instagram:hover .social-icon {
+    color: #8a3ab9; /* Instagram purple */
 }
