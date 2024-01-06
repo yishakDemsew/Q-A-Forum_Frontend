@@ -61,7 +61,9 @@
     text-decoration: none; /* Remove underline */
     color: inherit; /* Use the default text color */
 }
-
+.qst {
+    padding-right: 10px;
+}
 .button {
     background-color: #516cf0;
     /* padding: 13px 75px; */

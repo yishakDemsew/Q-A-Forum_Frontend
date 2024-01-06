@@ -124,7 +124,9 @@ function Header() {
                                         alignItems: "center",
                                     }}
                                 >
-                                    <Link to="/home">Quest.</Link>
+                                    <Link to="/home" className="qst">
+                                        Quest.
+                                    </Link>
                                     <button
                                         onClick={() => handleSignOut()}
                                         className="button"
