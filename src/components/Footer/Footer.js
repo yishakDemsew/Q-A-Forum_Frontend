@@ -5,7 +5,7 @@ import "./Footer.css";
 function Footer() {
     return (
         <div className="mainFooterWrapper">
-            <div className="parent-div">
+            <div className="parent-div1">
                 <img src={img} alt="evangadi logo" />
                 {/* Social media icons */}
                 <div>
