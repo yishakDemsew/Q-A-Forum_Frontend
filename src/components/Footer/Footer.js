@@ -8,24 +8,28 @@ function Footer() {
             <div className="parent-div">
                 <img src={img} alt="evangadi logo" />
                 {/* social media icons */}
-                <ul className="social-icons">
-                    <li>
-                        <a href="#">
-                            <span className="material-icons">facebook</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span className="material-icons">twitter</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span className="material-icons">instagram</span>
-                        </a>
-                    </li>
-                    {/* Add more icons as needed */}
-                </ul>
+                <div>
+                    <ul className="social-icons">
+                        <li>
+                            <a href="#">
+                                <span className="material-icons">facebook</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span className="material-icons">twitter</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span className="material-icons">
+                                    instagram
+                                </span>
+                            </a>
+                        </li>
+                        {/* Add more icons as needed */}
+                    </ul>
+                </div>
             </div>
             <div className="parent-div">
                 <ul className="footer">
