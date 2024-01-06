@@ -117,8 +117,14 @@ function Header() {
                                 </Link>
                             ) : (
                                 // If user is not authenticated, show Sign In button
-                                <div style={{ display: "flex", gap: "10px" }}>
-                                    <Link to="/home">Home</Link>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        gap: "10px",
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    <Link to="/home">Quest.</Link>
                                     <button
                                         onClick={() => handleSignOut()}
                                         className="button"

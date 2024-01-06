@@ -48,8 +48,9 @@
 } */
 
 .lists > li {
-    margin: 0 20px;
+    margin: 0 20px 0 0;
     color: grey;
+    text-align: center;
 }
 
 .lists > li:hover {
