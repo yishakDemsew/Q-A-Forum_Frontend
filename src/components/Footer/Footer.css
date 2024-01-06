@@ -72,6 +72,7 @@ footer .social-icons li {
     flex-direction: column;
     align-items: center;
     /* centers items horizontally  */
+    justify-content: center;
 }
 
 .parent-div1 .social-icons {
@@ -86,4 +87,16 @@ footer .social-icons li {
 
 .parent-div1 .social-icons li:last-child {
     margin-right: 0; /* Removes the margin from the last list item */
+}
+
+.social-icons a {
+    color: #fff;
+    display: inline-block;
+    width: 38px;
+    text-align: center;
+    line-height: 38px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    font-size: 16px;
+    height: 38px;
 }
