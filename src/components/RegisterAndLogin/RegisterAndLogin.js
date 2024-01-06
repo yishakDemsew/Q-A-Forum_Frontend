@@ -263,7 +263,18 @@ function RegisterAndLogin() {
                                 <Link>terms of service.</Link>
                             </p>
                             <div className="textCenter">
-                                <button
+                                <Link to="/home" className="white">
+                                    <button
+                                        className="button"
+                                        onClick={agreeAndJoinHandler}
+                                    >
+                                        {isLoadingSignup
+                                            ? "Registering ..."
+                                            : "Agree and Join"}
+                                    </button>
+                                </Link>
+
+                                {/* <button
                                     className="button"
                                     onClick={agreeAndJoinHandler}
                                 >
@@ -272,7 +283,7 @@ function RegisterAndLogin() {
                                             ? "Registering ..."
                                             : "Agree and Join"}
                                     </Link>
-                                </button>
+                                </button> */}
                             </div>
 
                             <p className="textCenter">
