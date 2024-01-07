@@ -45,7 +45,7 @@ function Footer() {
                         </li>
                         <li>
                             <a
-                                href="https://www.youtube.com/channel/YOUR_CHANNEL_ID"
+                                href="https://www.youtube.com/@EvangadiTech"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="youtube" // Added class for YouTube
