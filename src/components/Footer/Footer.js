@@ -22,6 +22,7 @@ function Footer() {
                                 href="https://www.facebook.com/evangaditech"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                className="facebook" // Added class for Facebook
                             >
                                 <FontAwesomeIcon
                                     icon={faFacebookF}
@@ -34,6 +35,7 @@ function Footer() {
                                 href="https://www.instagram.com/evangaditech/"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                className="instagram" // Added class for Instagram
                             >
                                 <FontAwesomeIcon
                                     icon={faInstagram}
@@ -46,6 +48,7 @@ function Footer() {
                                 href="https://www.youtube.com/channel/YOUR_CHANNEL_ID"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                className="youtube" // Added class for YouTube
                             >
                                 <FontAwesomeIcon
                                     icon={faYoutube}

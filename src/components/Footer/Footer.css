@@ -102,6 +102,12 @@ footer .social-icons li {
 
     text-decoration: none;
     transition: all 0.4s ease;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: transparent;
 }
 
 .social-icons a:hover {
@@ -109,7 +115,6 @@ footer .social-icons li {
 }
 
 .social-icon {
-    color: #333; /* Default icon color */
     font-size: 24px; /* Adjust size as needed */
     transition: color 0.3s ease; /* Smooth transition for hover effect */
 }
